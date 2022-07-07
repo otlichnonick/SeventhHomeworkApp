@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftuinavigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anioutkazharkova/swiftuinavigator",
+      "state" : {
+        "revision" : "c4603e6bcdb803bbe616bdf4ffee85f058495c83",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
