@@ -29,6 +29,29 @@ class ViewModel: ObservableObject {
     private let presenter: BasePresenter = .init()
     private var bag = Set<AnyCancellable>()
     
+    var list: [DataModel] {
+        selectedSegment == 0 ? allNewsList : topNewsList
+    }
+    
+    var selectedNewsIndex: Int? {
+        list.firstIndex(where: { $0.uuid == selectedNews?.uuid })
+    }
+    
+    var nextNewsUuid: String? {
+        selectedNewsIndex.map { value in
+            let index = list.index(after: value)
+            return list[index].uuid
+        }
+    }
+    
+    var previousNewsUuid: String? {
+        guard let selectedNewsIndex = selectedNewsIndex else {
+            return nil
+        }
+        let index = list.index(before: selectedNewsIndex)
+        return list[safeIndex: index]?.uuid
+    }
+    
     func getNews() {
         selectedSegment == 0 ? getAllNews() : getTopNews()
     }
@@ -75,8 +98,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func getDetailNews() {
-        guard let uuid = selectedNews?.uuid else { return }
+    func getDetailNews(with uuid: String) {
         detailNewsLoadState = .loading
         presenter.getSelectedNews(with: uuid, and: ["api_token": Constants.apiKey]) { [weak self] result in
             guard let strongSelf = self else { return }

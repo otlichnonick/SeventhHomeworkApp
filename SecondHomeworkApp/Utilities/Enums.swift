@@ -13,3 +13,16 @@ enum LoadState {
     case success
     case error
 }
+
+enum NewsType {
+    case all, top
+    
+    var title: String {
+        switch self {
+        case .all:
+            return "Все новости"
+        case .top:
+            return "Главное"
+        }
+    }
+}

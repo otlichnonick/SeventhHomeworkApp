@@ -17,7 +17,7 @@ struct MetaModel: Codable {
     var page: Int = 0
 }
 
-struct DataModel: Codable {
+struct DataModel: Codable, Equatable {
     var uuid: String = ""
     var title: String = ""
     var description: String?

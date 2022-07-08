@@ -16,11 +16,14 @@
 		3A84FC132878002D004A764C /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC122878002D004A764C /* BasePresenter.swift */; };
 		3A84FC1528780DDC004A764C /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC1428780DDC004A764C /* CustomProgressView.swift */; };
 		3A84FC1728781911004A764C /* DetailNewsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC1628781911004A764C /* DetailNewsScreen.swift */; };
+		3A84FC1A28781A5B004A764C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3A84FC1928781A5B004A764C /* SDWebImageSwiftUI */; };
+		3A84FC1C28782301004A764C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC1B28782301004A764C /* CustomButton.swift */; };
+		3A84FC1E28783607004A764C /* Array + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC1D28783607004A764C /* Array + Ext.swift */; };
+		3A84FC2028783B3D004A764C /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC1F28783B3D004A764C /* PickerCell.swift */; };
 		3AAB01802874C3F400D7769E /* SecondHomeworkAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB017F2874C3F400D7769E /* SecondHomeworkAppApp.swift */; };
 		3AAB01822874C3F400D7769E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB01812874C3F400D7769E /* ContentView.swift */; };
 		3AAB01842874C3F600D7769E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AAB01832874C3F600D7769E /* Assets.xcassets */; };
 		3AAB01872874C3F600D7769E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AAB01862874C3F600D7769E /* Preview Assets.xcassets */; };
-		3AAB018F2874C44F00D7769E /* SwiftUINavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAB018E2874C44F00D7769E /* SwiftUINavigator */; };
 		3AAB01932874C6D500D7769E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB01922874C6D500D7769E /* Constants.swift */; };
 		3AAB01952874C78300D7769E /* ContentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB01942874C78300D7769E /* ContentList.swift */; };
 		3AAB01972874CA8900D7769E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB01962874CA8900D7769E /* ViewModel.swift */; };
@@ -37,6 +40,9 @@
 		3A84FC122878002D004A764C /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		3A84FC1428780DDC004A764C /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		3A84FC1628781911004A764C /* DetailNewsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsScreen.swift; sourceTree = "<group>"; };
+		3A84FC1B28782301004A764C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		3A84FC1D28783607004A764C /* Array + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Ext.swift"; sourceTree = "<group>"; };
+		3A84FC1F28783B3D004A764C /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
 		3AAB017C2874C3F400D7769E /* SecondHomeworkApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecondHomeworkApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AAB017F2874C3F400D7769E /* SecondHomeworkAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeworkAppApp.swift; sourceTree = "<group>"; };
 		3AAB01812874C3F400D7769E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AAB018F2874C44F00D7769E /* SwiftUINavigator in Frameworks */,
+				3A84FC1A28781A5B004A764C /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +72,8 @@
 				3AAB01942874C78300D7769E /* ContentList.swift */,
 				3A84FC0D2877FC48004A764C /* NewsCell.swift */,
 				3A84FC1428780DDC004A764C /* CustomProgressView.swift */,
+				3A84FC1B28782301004A764C /* CustomButton.swift */,
+				3A84FC1F28783B3D004A764C /* PickerCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -148,6 +156,7 @@
 			children = (
 				3AAB01922874C6D500D7769E /* Constants.swift */,
 				3A84FC102877FF2F004A764C /* Enums.swift */,
+				3A84FC1D28783607004A764C /* Array + Ext.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -181,7 +190,7 @@
 			);
 			name = SecondHomeworkApp;
 			packageProductDependencies = (
-				3AAB018E2874C44F00D7769E /* SwiftUINavigator */,
+				3A84FC1928781A5B004A764C /* SDWebImageSwiftUI */,
 			);
 			productName = SecondHomeworkApp;
 			productReference = 3AAB017C2874C3F400D7769E /* SecondHomeworkApp.app */;
@@ -213,6 +222,7 @@
 			mainGroup = 3AAB01732874C3F400D7769E;
 			packageReferences = (
 				3AAB018D2874C44F00D7769E /* XCRemoteSwiftPackageReference "swiftuinavigator" */,
+				3A84FC1828781A5B004A764C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 3AAB017D2874C3F400D7769E /* Products */;
 			projectDirPath = "";
@@ -244,6 +254,8 @@
 				3AAB01992874CAFE00D7769E /* NewsModel.swift in Sources */,
 				3AAB01972874CA8900D7769E /* ViewModel.swift in Sources */,
 				3AAB01822874C3F400D7769E /* ContentView.swift in Sources */,
+				3A84FC1C28782301004A764C /* CustomButton.swift in Sources */,
+				3A84FC2028783B3D004A764C /* PickerCell.swift in Sources */,
 				3AAB01802874C3F400D7769E /* SecondHomeworkAppApp.swift in Sources */,
 				3AAB01932874C6D500D7769E /* Constants.swift in Sources */,
 				3A84FC06287769E2004A764C /* NetworkLogger.swift in Sources */,
@@ -253,6 +265,7 @@
 				3A84FC0228776704004A764C /* APICall.swift in Sources */,
 				3AAB01952874C78300D7769E /* ContentList.swift in Sources */,
 				3A84FC112877FF2F004A764C /* Enums.swift in Sources */,
+				3A84FC1E28783607004A764C /* Array + Ext.swift in Sources */,
 				3A84FC1528780DDC004A764C /* CustomProgressView.swift in Sources */,
 				3A84FC0E2877FC48004A764C /* NewsCell.swift in Sources */,
 			);
@@ -457,6 +470,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A84FC1828781A5B004A764C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		3AAB018D2874C44F00D7769E /* XCRemoteSwiftPackageReference "swiftuinavigator" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/anioutkazharkova/swiftuinavigator";
@@ -468,10 +489,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AAB018E2874C44F00D7769E /* SwiftUINavigator */ = {
+		3A84FC1928781A5B004A764C /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AAB018D2874C44F00D7769E /* XCRemoteSwiftPackageReference "swiftuinavigator" */;
-			productName = SwiftUINavigator;
+			package = 3A84FC1828781A5B004A764C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
