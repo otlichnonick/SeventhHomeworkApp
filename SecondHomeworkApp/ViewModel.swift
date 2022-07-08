@@ -6,31 +6,87 @@
 //
 
 import Foundation
-import SwiftUI
+import Combine
 
 class ViewModel: ObservableObject {
     @Published var selectedSegment = 0
-    @Published var list: [DataModel] = .init()
-    @Published var newsModel: NewsModel?
-    @Published var page: Int = 1
+    @Published var newsModel: NewsModel = .init()
     @Published var categories: [String] = .init()
-    @Published var route: NewsAPI!
+    @Published var selectedNews: DataModel?
     
-    private let networkManager: NetworkManager = .init()
+    @Published var allNewsPage: Int = 1
+    @Published var allNewsList: [DataModel] = .init()
+    @Published var canLoadAllNewsNextPage: Bool = true
+    @Published var allNewsLoadState: LoadState = .notRequest
+
+    @Published var topNewsPage: Int = 1
+    @Published var topNewsList: [DataModel] = .init()
+    @Published var canLoadTopNewsNextPage: Bool = true
+    @Published var topNewsLoadState: LoadState = .notRequest
     
-    init() {
-        route = .all(page: page, categories: categories)
-    }
+    @Published var detailNewsLoadState: LoadState = .notRequest
+    
+    private let presenter: BasePresenter = .init()
+    private var bag = Set<AnyCancellable>()
     
     func getNews() {
-        networkManager.getNews(route: route) { [weak self] response in
-            switch response {
-            case .success(let model):
-                self?.newsModel = model
-                self?.list = model.data
-                debugPrint("newsModel", model)
+        selectedSegment == 0 ? getAllNews() : getTopNews()
+    }
+    
+    private func getAllNews() {
+        guard canLoadAllNewsNextPage, allNewsLoadState != .loading else { return }
+        allNewsLoadState = .loading
+        presenter.getAllNews(queryParams: ["api_token": Constants.apiKey, "page": self.allNewsPage.description, "language": "en"]) { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let response):
+                if response.data.isEmpty {
+                    strongSelf.canLoadAllNewsNextPage = false
+                }
+                strongSelf.allNewsList += response.data
+                strongSelf.allNewsPage += 1
+                strongSelf.allNewsLoadState = .success
             case .failure(let error):
-                debugPrint("error", error)
+                strongSelf.allNewsLoadState = .error
+                strongSelf.canLoadAllNewsNextPage = false
+                debugPrint("error with all news", error)
+            }
+        }
+    }
+    
+    private func getTopNews() {
+        guard canLoadTopNewsNextPage, topNewsLoadState != .loading else { return }
+        topNewsLoadState = .loading
+        presenter.getTopNews(queryParams: ["api_token": Constants.apiKey, "page": self.topNewsPage.description, "language": "en"]) { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let response):
+                if response.data.isEmpty {
+                    strongSelf.canLoadTopNewsNextPage = false
+                }
+                strongSelf.topNewsList += response.data
+                strongSelf.topNewsPage += 1
+                strongSelf.topNewsLoadState = .success
+            case .failure(let error):
+                strongSelf.topNewsLoadState = .error
+                strongSelf.canLoadTopNewsNextPage = false
+                debugPrint("error with all news", error)
+            }
+        }
+    }
+    
+    func getDetailNews() {
+        guard let uuid = selectedNews?.uuid else { return }
+        detailNewsLoadState = .loading
+        presenter.getSelectedNews(with: uuid, and: ["api_token": Constants.apiKey]) { [weak self] result in
+            guard let strongSelf = self else { return }
+                switch result {
+                case .success(let response):
+                    strongSelf.selectedNews = response
+                    strongSelf.detailNewsLoadState = .success
+                case .failure(let error):
+                    strongSelf.detailNewsLoadState = .error
+                    debugPrint("error with detail news", error)
             }
         }
     }

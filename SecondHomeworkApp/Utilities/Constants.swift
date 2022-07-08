@@ -9,5 +9,5 @@ import Foundation
 
 struct Constants {
     static let apiKey = "cCroHltkP75P6zZCAfErTHkktGE9DvvQdePQPhlz"
-    static let baseUrl = "https://api.thenewsapi.com/v1/news/headlines HTTP/1.1"
+    static let baseUrl = "https://api.thenewsapi.com/v1/news/"
 }
