@@ -19,11 +19,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                    VStack {
+                VStack(spacing: 16) {
                         Text("Для просмотра новостей выберите нужный раздел")
                             .font(.title2)
                             .foregroundColor(.indigo)
-                            .padding()
                             .background(
                                 GeometryReader(content: { geometry in
                                     Color.clear
@@ -45,7 +44,6 @@ struct ContentView: View {
                             if viewModel.list.isEmpty {
                             viewModel.getNews()
                             }
-                            movePickerItem()
                         }
                         
                         ZStack {
@@ -66,6 +64,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .padding()
                 
                 if showPickerItem {
                     VStack {
@@ -135,17 +134,6 @@ struct ContentView: View {
     private func showErrorAlert(with text: String) {
         showAlert.toggle()
         errorMessage = text
-    }
-    
-    private func movePickerItem() {
-        showPickerItem = true
-        withAnimation(Animation.easeIn(duration: 2), {
-            yPosition = UIScreen.main.bounds.height * 0.9
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                showPickerItem = false
-                yPosition = 0
-            }
-        })
     }
 }
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0BDA2F291D961100C38CAC /* NewsRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0BDA2E291D961100C38CAC /* NewsRealmModel.swift */; };
+		3A45BEE6291BB598009F32CA /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45BEE5291BB598009F32CA /* RealmManager.swift */; };
+		3A58B72B2911BF0500EF63CD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A58B72A2911BF0500EF63CD /* Realm */; };
+		3A58B72D2911BF0500EF63CD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A58B72C2911BF0500EF63CD /* RealmSwift */; };
 		3A84FC0228776704004A764C /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC0128776704004A764C /* APICall.swift */; };
 		3A84FC04287768BB004A764C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC03287768BB004A764C /* APIManager.swift */; };
 		3A84FC06287769E2004A764C /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FC05287769E2004A764C /* NetworkLogger.swift */; };
@@ -31,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0BDA2E291D961100C38CAC /* NewsRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRealmModel.swift; sourceTree = "<group>"; };
+		3A45BEE5291BB598009F32CA /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		3A84FC0128776704004A764C /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		3A84FC03287768BB004A764C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3A84FC05287769E2004A764C /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
@@ -59,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A58B72D2911BF0500EF63CD /* RealmSwift in Frameworks */,
+				3A58B72B2911BF0500EF63CD /* Realm in Frameworks */,
 				3A84FC1A28781A5B004A764C /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A45BEE4291BB583009F32CA /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				3A45BEE5291BB598009F32CA /* RealmManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		3A84FC092877FBD3004A764C /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +139,7 @@
 		3AAB017E2874C3F400D7769E /* SecondHomeworkApp */ = {
 			isa = PBXGroup;
 			children = (
+				3A45BEE4291BB583009F32CA /* Storage */,
 				3A84FC0C2877FC13004A764C /* Main */,
 				3A84FC0B2877FBEF004A764C /* UI */,
 				3AAB019A2874CB8F00D7769E /* Networking */,
@@ -147,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				3AAB01982874CAFE00D7769E /* NewsModel.swift */,
+				3A0BDA2E291D961100C38CAC /* NewsRealmModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +209,8 @@
 			name = SecondHomeworkApp;
 			packageProductDependencies = (
 				3A84FC1928781A5B004A764C /* SDWebImageSwiftUI */,
+				3A58B72A2911BF0500EF63CD /* Realm */,
+				3A58B72C2911BF0500EF63CD /* RealmSwift */,
 			);
 			productName = SecondHomeworkApp;
 			productReference = 3AAB017C2874C3F400D7769E /* SecondHomeworkApp.app */;
@@ -223,6 +243,7 @@
 			packageReferences = (
 				3AAB018D2874C44F00D7769E /* XCRemoteSwiftPackageReference "swiftuinavigator" */,
 				3A84FC1828781A5B004A764C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				3A58B7292911BF0500EF63CD /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 3AAB017D2874C3F400D7769E /* Products */;
 			projectDirPath = "";
@@ -256,11 +277,13 @@
 				3AAB01822874C3F400D7769E /* ContentView.swift in Sources */,
 				3A84FC1C28782301004A764C /* CustomButton.swift in Sources */,
 				3A84FC2028783B3D004A764C /* PickerCell.swift in Sources */,
+				3A0BDA2F291D961100C38CAC /* NewsRealmModel.swift in Sources */,
 				3AAB01802874C3F400D7769E /* SecondHomeworkAppApp.swift in Sources */,
 				3AAB01932874C6D500D7769E /* Constants.swift in Sources */,
 				3A84FC06287769E2004A764C /* NetworkLogger.swift in Sources */,
 				3A84FC1728781911004A764C /* DetailNewsScreen.swift in Sources */,
 				3A84FC0828776A50004A764C /* ErrorHandler.swift in Sources */,
+				3A45BEE6291BB598009F32CA /* RealmManager.swift in Sources */,
 				3A84FC132878002D004A764C /* BasePresenter.swift in Sources */,
 				3A84FC0228776704004A764C /* APICall.swift in Sources */,
 				3AAB01952874C78300D7769E /* ContentList.swift in Sources */,
@@ -470,6 +493,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A58B7292911BF0500EF63CD /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.25.0;
+			};
+		};
 		3A84FC1828781A5B004A764C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -489,6 +520,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A58B72A2911BF0500EF63CD /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A58B7292911BF0500EF63CD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		3A58B72C2911BF0500EF63CD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A58B7292911BF0500EF63CD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		3A84FC1928781A5B004A764C /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A84FC1828781A5B004A764C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

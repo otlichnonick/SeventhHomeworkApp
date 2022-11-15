@@ -18,7 +18,7 @@ class ViewModel: ObservableObject {
     @Published var allNewsList: [DataModel] = .init()
     @Published var canLoadAllNewsNextPage: Bool = true
     @Published var allNewsLoadState: LoadState = .notRequest
-
+    
     @Published var topNewsPage: Int = 1
     @Published var topNewsList: [DataModel] = .init()
     @Published var canLoadTopNewsNextPage: Bool = true
@@ -28,6 +28,7 @@ class ViewModel: ObservableObject {
     
     private let presenter: BasePresenter = .init()
     private var bag = Set<AnyCancellable>()
+    private let realmManager = RealmManager()
     
     var list: [DataModel] {
         selectedSegment == 0 ? allNewsList : topNewsList
@@ -96,6 +97,15 @@ class ViewModel: ObservableObject {
                 debugPrint("error with all news", error)
             }
         }
+    }
+    
+    private func addToRealm(_ model: DataModel) {
+        let realmModel = AllNewsRealmModel()
+        realmModel.uuid = model.uuid
+        realmModel.title = model.title
+        realmModel.descriptionNews = model.description
+        realmModel.image_url = model.image_url
+        realmManager.addAllNews(realmModel)
     }
     
     func getDetailNews(with uuid: String) {

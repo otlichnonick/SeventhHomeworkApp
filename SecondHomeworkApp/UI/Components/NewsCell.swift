@@ -24,7 +24,7 @@ struct NewsCell: View {
             Spacer()
         }
         .padding()
-        .background(Color.mint)
+        .background(Color(uiColor: UIColor.systemGray5))
         .cornerRadius(10)
     }
 }
