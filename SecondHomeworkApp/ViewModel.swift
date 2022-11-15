@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 class ViewModel: ObservableObject {
-    @Published var selectedSegment = 0
     @Published var newsModel: NewsModel = .init()
     @Published var categories: [String] = .init()
     @Published var selectedNews: DataModel?
@@ -19,29 +18,20 @@ class ViewModel: ObservableObject {
     @Published var canLoadAllNewsNextPage: Bool = true
     @Published var allNewsLoadState: LoadState = .notRequest
     
-    @Published var topNewsPage: Int = 1
-    @Published var topNewsList: [DataModel] = .init()
-    @Published var canLoadTopNewsNextPage: Bool = true
-    @Published var topNewsLoadState: LoadState = .notRequest
-    
     @Published var detailNewsLoadState: LoadState = .notRequest
     
     private let presenter: BasePresenter = .init()
     private var bag = Set<AnyCancellable>()
     private let realmManager = RealmManager()
     
-    var list: [DataModel] {
-        selectedSegment == 0 ? allNewsList : topNewsList
-    }
-    
     var selectedNewsIndex: Int? {
-        list.firstIndex(where: { $0.uuid == selectedNews?.uuid })
+        allNewsList.firstIndex(where: { $0.uuid == selectedNews?.uuid })
     }
     
     var nextNewsUuid: String? {
         selectedNewsIndex.map { value in
-            let index = list.index(after: value)
-            return list[index].uuid
+            let index = allNewsList.index(after: value)
+            return allNewsList[index].uuid ?? ""
         }
     }
     
@@ -49,15 +39,31 @@ class ViewModel: ObservableObject {
         guard let selectedNewsIndex = selectedNewsIndex else {
             return nil
         }
-        let index = list.index(before: selectedNewsIndex)
-        return list[safeIndex: index]?.uuid
+        let index = allNewsList.index(before: selectedNewsIndex)
+        return allNewsList[safeIndex: index]?.uuid
     }
     
-    func getNews() {
-        selectedSegment == 0 ? getAllNews() : getTopNews()
+    init() {
+        realmManager.$newsArray
+            .sink { [weak self] realmNews in
+                realmNews.forEach { realmNews in
+                    let allNews = DataModel(uuid: realmNews.uuid,
+                                            title: realmNews.title,
+                                            description: realmNews.descriptionNews,
+                                            image_url: realmNews.image_url)
+                    self?.allNewsList.append(allNews)
+                }
+            }
+            .store(in: &bag)
     }
     
-    private func getAllNews() {
+    func showAllNews() {
+        if allNewsList.isEmpty {
+            downloadAllNews()
+        }
+    }
+    
+    func downloadAllNews() {
         guard canLoadAllNewsNextPage, allNewsLoadState != .loading else { return }
         allNewsLoadState = .loading
         presenter.getAllNews(queryParams: ["api_token": Constants.apiKey, "page": self.allNewsPage.description, "language": "en"]) { [weak self] result in
@@ -68,6 +74,12 @@ class ViewModel: ObservableObject {
                     strongSelf.canLoadAllNewsNextPage = false
                 }
                 strongSelf.allNewsList += response.data
+                response.data.forEach { dataModel in
+                    strongSelf.addToRealm(dataModel)
+                    if !strongSelf.allNewsList.contains(dataModel) {
+                        strongSelf.allNewsList.append(dataModel)
+                    }
+                }
                 strongSelf.allNewsPage += 1
                 strongSelf.allNewsLoadState = .success
             case .failure(let error):
@@ -78,34 +90,13 @@ class ViewModel: ObservableObject {
         }
     }
     
-    private func getTopNews() {
-        guard canLoadTopNewsNextPage, topNewsLoadState != .loading else { return }
-        topNewsLoadState = .loading
-        presenter.getTopNews(queryParams: ["api_token": Constants.apiKey, "page": self.topNewsPage.description, "language": "en"]) { [weak self] result in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .success(let response):
-                if response.data.isEmpty {
-                    strongSelf.canLoadTopNewsNextPage = false
-                }
-                strongSelf.topNewsList += response.data
-                strongSelf.topNewsPage += 1
-                strongSelf.topNewsLoadState = .success
-            case .failure(let error):
-                strongSelf.topNewsLoadState = .error
-                strongSelf.canLoadTopNewsNextPage = false
-                debugPrint("error with all news", error)
-            }
-        }
-    }
-    
     private func addToRealm(_ model: DataModel) {
-        let realmModel = AllNewsRealmModel()
+        let realmModel = NewsRealmModel()
         realmModel.uuid = model.uuid
         realmModel.title = model.title
         realmModel.descriptionNews = model.description
         realmModel.image_url = model.image_url
-        realmManager.addAllNews(realmModel)
+        realmManager.addNews(realmModel)
     }
     
     func getDetailNews(with uuid: String) {

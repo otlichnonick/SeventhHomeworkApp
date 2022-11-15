@@ -10,12 +10,12 @@ import RealmSwift
 
 class RealmManager: ObservableObject {
     private var localRealm: Realm?
-    @Published var allNews: [AllNewsRealmModel] = .init()
-    @Published var topNews: [TopNewsRealmModel] = .init()
+    @Published var newsArray: [NewsRealmModel] = .init()
     
     init() {
         openRealm()
-        getAllNews()
+        getNews()
+        print("news", newsArray)
     }
     
     func openRealm() {
@@ -34,12 +34,16 @@ class RealmManager: ObservableObject {
         }
     }
     
-    func addAllNews(_ news: AllNewsRealmModel) {
-        guard allNews.contains(where: { $0.uuid == news.uuid }) else {
-            print("already contain news with uuid: \(news.uuid)")
-            return
-        }
+    func addNews(_ news: NewsRealmModel) {
+            guard !newsArray.contains(news) else {
+                print("already contain news with uuid: \(news.uuid)")
+                return
+            }
         
+            writeToRealm(news)
+    }
+    
+    private func writeToRealm(_ news: NewsRealmModel) {
         if let localRealm = localRealm {
             do {
                 try localRealm.write({
@@ -49,27 +53,29 @@ class RealmManager: ObservableObject {
             } catch {
                 print("Error adding to Realm", error)
             }
+        } else {
+            print("no realm")
         }
     }
     
-    func getAllNews() {
+    func getNews() {
         if let localRealm = localRealm {
-            let news = localRealm.objects(AllNewsRealmModel.self)
-            news.forEach { allNews.append($0) }
+            let news = localRealm.objects(NewsRealmModel.self)
+            news.forEach { newsArray.append($0) }
         }
     }
     
     func deleteNews(with id: String) {
         if let localRealm = localRealm {
-            let allNewsArray = localRealm.objects(AllNewsRealmModel.self)
+            let allNewsArray = localRealm.objects(NewsRealmModel.self)
             let news = allNewsArray.filter({ $0.uuid == id })
             guard !news.isEmpty else { return }
             
             do {
                 try localRealm.write {
                     localRealm.delete(news)
-                    allNews = []
-                    getAllNews()
+                    newsArray = []
+                    getNews()
                     print("News deleted from Realm")
                 }
             } catch {

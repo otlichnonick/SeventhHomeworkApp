@@ -31,7 +31,7 @@ struct DetailNewsScreen: View {
                     .aspectRatio(contentMode: .fill)
                 
                 HStack {
-                    Text(news.title)
+                    Text(news.title ?? "")
                         .font(.headline)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)

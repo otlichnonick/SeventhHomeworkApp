@@ -18,8 +18,8 @@ struct MetaModel: Codable {
 }
 
 struct DataModel: Codable, Equatable {
-    var uuid: String = ""
-    var title: String = ""
+    var uuid: String?
+    var title: String?
     var description: String?
     var image_url: String?
 }

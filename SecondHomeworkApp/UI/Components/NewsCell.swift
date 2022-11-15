@@ -12,7 +12,7 @@ struct NewsCell: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(cellData.title)
+                Text(cellData.title ?? "")
                     .font(.title3)
                 
                 Text(cellData.description ?? "")
